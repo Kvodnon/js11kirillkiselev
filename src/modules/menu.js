@@ -43,7 +43,7 @@ const scrollToElem = (startTime, currentTime, duration, scrollEndElemTop, startS
   }
 }
 
-export function openMenu() {
+const openMenu = () => {
   const visibility = 'visible';
 
   popup.style.paddingRight = 0;
@@ -52,7 +52,7 @@ export function openMenu() {
   popup.style.visibility = visibility;
 }
 
-export function closeMenu() {
+const closeMenu = () => {
   const visibility = 'hidden';
 
   popup.style.paddingRight = '10px';
@@ -85,7 +85,7 @@ const menuHandler = (event) => {
 
   const target = event.target;
 
-  if (!target.closest('.close-menu, .menu__icon, .popup-menu-nav__item')) return;
+  if (!target.closest('.close-menu, .menu__icon, .menu-link')) return;
 
   const menuVisible = popup.style.visibility === 'visible' ? true : false;
 
