@@ -20,30 +20,30 @@ const formHandler = (event) => {
 
   if (!policy.checked) {
     alert('Отметьте галочку!');
-  }
+  } else {
+    const formData = new FormData(form);
   
-  const formData = new FormData(form);
-
-  let body = {};
-
-  formData.forEach((value, key) => {
-    body[key] = value;
-  });
-
-  postData(body).then((response) => {
-    if (response.status !== 200) {
-      throw new Error(response.statusText);
-    }
-
-    openThanksPopup();
-
-  }, (error) => {
-
-    console.log(error);
-    
-  });
-
-  form.reset();
+    let body = {};
+  
+    formData.forEach((value, key) => {
+      body[key] = value;
+    });
+  
+    postData(body).then((response) => {
+      if (response.status !== 200) {
+        throw new Error(response.statusText);
+      }
+  
+      openThanksPopup();
+  
+    }, (error) => {
+  
+      console.log(error);
+      
+    });
+  
+    form.reset();
+  }
 };
 
 const initForms = () => {
