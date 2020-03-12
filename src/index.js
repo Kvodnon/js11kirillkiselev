@@ -1,9 +1,9 @@
-'uses strict';
+'use strict';
 
 import phones from './modules/phones';
-import menu from './modules/menu';
+import sideMenu from './modules/menu';
 import popupTypes from './modules/popupTypes';
 
 phones();
-menu();
+sideMenu();
 popupTypes();
