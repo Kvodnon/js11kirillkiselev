@@ -12,9 +12,14 @@ const phones = () => {
   }
 
   const arrowHandler = (event) => {
-    const arrow = event.target,
-      opacity = +secondPhone.style.opacity;
-      
+    let arrow = event.target;
+
+    if (!arrow.matches('img')) {
+      arrow = arrow.querySelector('img');
+    };
+
+    const opacity = +secondPhone.style.opacity;
+
     let topIndent = '30px',
       rotate = 'rotate(180deg)';
       
