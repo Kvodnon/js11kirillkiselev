@@ -1,5 +1,5 @@
 const phones = () => {
-  const arrow = document.querySelector('.header-contacts__arrow'),
+  const arrow = document.querySelector('.header-contacts__arrow img'),
     accord = document.querySelector('.header-contacts__phone-number-accord'),
     secondPhone = accord.querySelector('.header-contacts__phone-number');
   
@@ -12,12 +12,6 @@ const phones = () => {
   }
 
   const arrowHandler = (event) => {
-    let arrow = event.target;
-
-    if (!arrow.matches('img')) {
-      arrow = arrow.querySelector('img');
-    };
-
     const opacity = +secondPhone.style.opacity;
 
     let topIndent = '30px',
@@ -37,7 +31,7 @@ const phones = () => {
     arrow.style.transform = rotate;
   };
 
-  arrow.addEventListener('click', arrowHandler);
+  arrow.parentNode.addEventListener('click', arrowHandler);
 };
 
 export default phones;
