@@ -10,6 +10,7 @@ import popupThanks from './modules/popupThanks';
 import tooltips from './modules/tooltips';
 import formulaSlider from './modules/formulaSlider';
 import carousel from './modules/carousel';
+import popupConsultation from './modules/popupConsultation';
 
 phones();
 sideMenu();
@@ -21,3 +22,4 @@ initForms();
 tooltips();
 formulaSlider();
 carousel();
+popupConsultation();
