@@ -72,3 +72,18 @@
 .reviews-slider {
   overflow: unset;
 }
+.reviews-slider-wrap {
+  max-width: 700px;
+}
+#reviews-arrow_left {
+  left: 20px;
+}
+#reviews-arrow_right {
+  right: 20px;
+}
+@media screen and (max-width: 575px) {
+  #reviews-arrow_right,
+  #reviews-arrow_left {
+      top: 50%;
+  }
+}
