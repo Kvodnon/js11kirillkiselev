@@ -7,6 +7,9 @@ import inputMasks from './modules/inputMasks';
 import popupPrivacy from './modules/popupPrivacy';
 import initForms from './modules/forms';
 import popupThanks from './modules/popupThanks';
+import tooltips from './modules/tooltips';
+import formulaSlider from './modules/formulaSlider';
+import carousel from './modules/carousel';
 
 phones();
 sideMenu();
@@ -15,3 +18,6 @@ inputMasks();
 popupPrivacy();
 popupThanks();
 initForms();
+tooltips();
+formulaSlider();
+carousel();
