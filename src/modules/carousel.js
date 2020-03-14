@@ -1,11 +1,11 @@
-class SliderCarousel {
+export default class SliderCarousel {
   constructor({
-    main, 
-    wrap, 
-    next, 
-    prev, 
-    infinity = false, 
-    position = 0, 
+    main,
+    wrap,
+    next,
+    prev,
+    infinity = false,
+    position = 0,
     slidesToShow = 3,
     responsive = [],
     numberSlider = 1
@@ -28,7 +28,7 @@ class SliderCarousel {
     };
     this.responsive = responsive;
     this.numberSlider = numberSlider;
-    
+
     this.event = new Event("sliderChange");
   }
 
@@ -55,7 +55,7 @@ class SliderCarousel {
 
   addStyle() {
     let style = document.getElementById(`sliderCarousel-style${this.numberSlider}`);
-    
+
     if (!style) {
       style = document.createElement('style');
       style.id = `sliderCarousel-style${this.numberSlider}`;
@@ -100,7 +100,7 @@ class SliderCarousel {
 
     this.main.dispatchEvent(this.event);
   }
-  
+
   nextSlider() {
     if (this.options.infinity || this.options.position < this.options.maxPosition) {
       ++this.options.position;
@@ -183,73 +183,11 @@ class SliderCarousel {
   }
 }
 
-const carousel = () => {
-  let countSliders = 0;
+export let sliderCounter = {
+  num: 0,
+  get count() {
+    this.num++;
 
-  const carousel = new SliderCarousel({
-    wrap: '.partners-slider',
-    main: '#partners .wrapper',
-    
-    prev: '#partners-arrow_left',
-    next: '#partners-arrow_right',
-
-    numberSlider: ++countSliders,
-    slidesToShow: 3,
-
-    responsive: [
-      {
-        breakpoint: 1024,
-        slideToShow: 3
-      },
-      {
-        breakpoint: 768,
-        slideToShow: 2
-      },
-      {
-        breakpoint: 576,
-        slideToShow: 1
-      }
-    ]
-  });
-
-  carousel.init();
-
-  const reviews = new SliderCarousel({
-    wrap: '.reviews-slider',
-    main: '.reviews-slider-wrap',
-    
-    prev: '#reviews-arrow_left',
-    next: '#reviews-arrow_right',
-
-    numberSlider: ++countSliders,
-    slidesToShow: 1,
-  });
-
-  reviews.init();
-
-  const documents = new SliderCarousel({
-    wrap: '.popup-transparency-slider',
-    main: '.popup-transparency-slider-wrap',
-    
-    prev: '#transparency_left',
-    next: '#transparency_right',
-
-    numberSlider: ++countSliders,
-    slidesToShow: 1,
-  });
-
-  documents.init();
-
-  const modal = document.querySelector('.popup-transparency'),
-    total = modal.querySelector('.slider-counter-content__total'),
-    current = modal.querySelector('.slider-counter-content__current');
-  
-  total.innerText = documents.slides.length;
-  current.innerText = 1;
-
-  documents.main.addEventListener('sliderChange', () => {
-    current.innerText = documents.options.position + 1;
-  });
+    return this.num;
+  }
 };
-
-export default carousel;
