@@ -1,4 +1,4 @@
-import { openThanksPopup } from "./popupThanks";
+import { openThanksPopup } from "./modals/thanks";
 
 const forms = document.querySelectorAll('.feedback__form, .feedback-block__form');
 

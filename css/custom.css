@@ -87,3 +87,9 @@
       top: 50%;
   }
 }
+.modal_open {
+  visibility: visible;
+}
+.popup-transparency-slider {
+  overflow: unset;
+}

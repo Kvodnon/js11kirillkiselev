@@ -28,6 +28,8 @@ class SliderCarousel {
     };
     this.responsive = responsive;
     this.numberSlider = numberSlider;
+    
+    this.event = new Event("sliderChange");
   }
 
   init() {
@@ -95,6 +97,8 @@ class SliderCarousel {
 
       this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
     }
+
+    this.main.dispatchEvent(this.event);
   }
   
   nextSlider() {
@@ -107,6 +111,8 @@ class SliderCarousel {
 
       this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
     }
+
+    this.main.dispatchEvent(this.event);
   }
 
   addArrow() {
@@ -186,8 +192,6 @@ const carousel = () => {
     next: '#partners-arrow_right',
 
     numberSlider: 1,
-
-    infinity: false,
     slidesToShow: 3,
 
     responsive: [
@@ -216,12 +220,34 @@ const carousel = () => {
     next: '#reviews-arrow_right',
 
     numberSlider: 2,
-
-    infinity: false,
     slidesToShow: 1,
   });
 
   reviews.init();
+
+  const documents = new SliderCarousel({
+    wrap: '.popup-transparency-slider',
+    main: '.popup-transparency-slider-wrap',
+    
+    prev: '#transparency_left',
+    next: '#transparency_right',
+
+    numberSlider: 3,
+    slidesToShow: 1,
+  });
+
+  documents.init();
+
+  const modal = document.querySelector('.popup-transparency'),
+    total = modal.querySelector('.slider-counter-content__total'),
+    current = modal.querySelector('.slider-counter-content__current');
+  
+  total.innerText = documents.numberSlider;
+  current.innerText = 1;
+
+  documents.main.addEventListener('sliderChange', () => {
+    current.innerText = documents.options.position + 1;
+  });
 };
 
 export default carousel;

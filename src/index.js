@@ -2,24 +2,28 @@
 
 import phones from './modules/phones';
 import sideMenu from './modules/menu';
-import popupTypes from './modules/popupTypes';
 import inputMasks from './modules/inputMasks';
-import popupPrivacy from './modules/popupPrivacy';
 import initForms from './modules/forms';
-import popupThanks from './modules/popupThanks';
 import tooltips from './modules/tooltips';
 import formulaSlider from './modules/formulaSlider';
 import carousel from './modules/carousel';
-import popupConsultation from './modules/popupConsultation';
+import modalHandler from './modules/modalHandler';
+import consultation from './modules/modals/consultation';
+import privacy from './modules/modals/privacy';
+import types from './modules/modals/types';
+import thanks from './modules/modals/thanks';
+import transparency from './modules/modals/transparency';
 
 phones();
+modalHandler();
 sideMenu();
-popupTypes();
+types();
 inputMasks();
-popupPrivacy();
-popupThanks();
+privacy();
+thanks();
 initForms();
 tooltips();
 formulaSlider();
 carousel();
-popupConsultation();
+consultation();
+transparency();
