@@ -184,6 +184,8 @@ class SliderCarousel {
 }
 
 const carousel = () => {
+  let countSliders = 0;
+
   const carousel = new SliderCarousel({
     wrap: '.partners-slider',
     main: '#partners .wrapper',
@@ -191,7 +193,7 @@ const carousel = () => {
     prev: '#partners-arrow_left',
     next: '#partners-arrow_right',
 
-    numberSlider: 1,
+    numberSlider: ++countSliders,
     slidesToShow: 3,
 
     responsive: [
@@ -219,7 +221,7 @@ const carousel = () => {
     prev: '#reviews-arrow_left',
     next: '#reviews-arrow_right',
 
-    numberSlider: 2,
+    numberSlider: ++countSliders,
     slidesToShow: 1,
   });
 
@@ -232,7 +234,7 @@ const carousel = () => {
     prev: '#transparency_left',
     next: '#transparency_right',
 
-    numberSlider: 3,
+    numberSlider: ++countSliders,
     slidesToShow: 1,
   });
 
@@ -242,7 +244,7 @@ const carousel = () => {
     total = modal.querySelector('.slider-counter-content__total'),
     current = modal.querySelector('.slider-counter-content__current');
   
-  total.innerText = documents.numberSlider;
+  total.innerText = documents.slides.length;
   current.innerText = 1;
 
   documents.main.addEventListener('sliderChange', () => {
