@@ -11,8 +11,8 @@ export const open = (modal) => {
 
 const handler = (event) => {
   const target = event.target;
-
-  if (!target.matches('.close')) return;
+  
+  if (!target.matches('.close, .popup')) return;
 
   close(target);
 };
