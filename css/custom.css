@@ -96,3 +96,10 @@
 .scheme-slider {
   overflow: unset;
 }
+.msg {
+  transition: max-height .5s;
+  will-change: transition;
+}
+.msg-active ~ .msg {
+  max-height: 575px;
+}

@@ -15,6 +15,7 @@ import transparency from './modules/modals/transparency';
 import reviews from './modules/sliders/reviews';
 import partners from './modules/sliders/partners';
 import scheme from './modules/sliders/scheme';
+import FAQAccordion from './modules/accordion';
 
 phones();
 modalHandler();
@@ -31,3 +32,4 @@ types();
 consultation();
 transparency();
 scheme();
+FAQAccordion();
