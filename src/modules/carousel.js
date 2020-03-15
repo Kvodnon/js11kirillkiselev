@@ -66,20 +66,20 @@ export class SliderCarousel {
   }
 
   addStyle() {
-    let style = document.getElementById(`sliderCarousel-style${this.numberSlider}`);
+    this.style = document.getElementById(`sliderCarousel-style${this.numberSlider}`);
 
-    if (!style) {
-      style = document.createElement('style');
-      style.id = `sliderCarousel-style${this.numberSlider}`;
+    if (!this.style) {
+      this.style = document.createElement('style');
+      this.style.id = `sliderCarousel-style${this.numberSlider}`;
     }
 
-    style.textContent = `
+    this.style.textContent = `
       .glo-wrap {
         overflow: hidden;
       }
-      .glo-slider${this.numberSlider} {
+      .glo-wrap .glo-slider${this.numberSlider} {
         display: flex;
-        ${this.slideBy === 'Y' ? 'flex-wrap: wrap;' : ''}
+        ${this.slideBy === 'Y' ? 'flex-wrap: wrap;' : 'flex-wrap: nowrap;'}
         transition: transform .5s;
         will-change: transform;
       }
@@ -92,7 +92,12 @@ export class SliderCarousel {
       }
     `;
 
-    document.head.appendChild(style);
+    document.head.appendChild(this.style);
+  }
+
+  removeStyle() {
+    this.style.remove();
+    this.style = null;
   }
 
   controlSlider() {
