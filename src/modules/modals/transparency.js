@@ -1,5 +1,5 @@
 import { open } from "../modalHandler";
-import SliderCarousel, {sliderCounter} from "../carousel";
+import { SliderCarousel, sliderCounter } from "../carousel";
 
 const modal = document.querySelector('.popup-transparency'),
   slider = document.querySelector('.transparency-slider'),
@@ -16,7 +16,7 @@ const handler = () => {
   const item = target.parentNode;
   const children = [...slider.children]
 
-  documents.options.position = children.indexOf(item);
+  documents.toSlide(children.indexOf(item));
   current.innerText = documents.options.position + 1;
 
   open(modal);

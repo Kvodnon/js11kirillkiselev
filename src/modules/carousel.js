@@ -1,9 +1,11 @@
-export default class SliderCarousel {
+export class SliderCarousel {
   constructor({
     main,
     wrap,
     next,
     prev,
+    tabs,
+    slideBy = 'X',
     infinity = false,
     position = 0,
     slidesToShow = 3,
@@ -30,23 +32,30 @@ export default class SliderCarousel {
     this.numberSlider = numberSlider;
 
     this.event = new Event("sliderChange");
+    this.tabs = tabs;
+    this.slideBy = slideBy.toUpperCase();
   }
 
   init() {
     this.addGloClass();
     this.addStyle();
 
-    if (!this.prev && !this.next) {
+    if (!this.prev && !this.next && !this.tabs) {
       this.addArrow();
     }
 
-    this.controlSlider();
+    if (this.tabs) {
+      this.tabSlider();
+    } else {
+      this.controlSlider();
+    }
+
     this.responsiveInit();
   }
 
   addGloClass() {
-    this.main.classList.add(`glo-slider${this.numberSlider}`);
-    this.wrap.classList.add('glo-slider__wrap');
+    this.wrap.classList.add(`glo-slider${this.numberSlider}`);
+    this.main.classList.add(`glo-wrap`);
 
     for (const item of this.slides) {
       item.classList.add('glo-slider__item');
@@ -62,11 +71,12 @@ export default class SliderCarousel {
     }
 
     style.textContent = `
-      .glo-slider${this.numberSlider} {
+      .glo-wrap {
         overflow: hidden;
       }
-      .glo-slider${this.numberSlider} .glo-slider__wrap {
+      .glo-slider${this.numberSlider} {
         display: flex;
+        ${this.slideBy === 'Y' ? 'flex-wrap: wrap;' : ''}
         transition: transform .5s;
         will-change: transform;
       }
@@ -87,6 +97,34 @@ export default class SliderCarousel {
     this.next.addEventListener('click', this.nextSlider.bind(this));
   }
 
+  tabSlider() {
+    const tabs = [...document.querySelector(this.tabs).children];
+
+    for (const tab of tabs) {
+      tab.addEventListener('click', (event) => {
+        const current = document.querySelector('.repair-types-nav__item.active');
+        current.classList.remove('active');
+
+        const target = event.target;
+
+        target.classList.add('active');
+
+        if ([...tabs].indexOf(tab) > this.options.position) {
+          this.nextSlider();
+        } else if ([...tabs].indexOf(tab) < this.options.position) {
+          this.prevSlider();
+        }
+      });
+    }
+  }
+
+  toSlide(position) {
+    this.options.position = position;
+    this.wrap.style.transform = `translate${this.slideBy}(-${this.options.position * this.options.widthSlide}%)`;
+  
+    this.main.dispatchEvent(this.event);
+  }
+
   prevSlider() {
     if (this.options.infinity || this.options.position > 0) {
       --this.options.position;
@@ -95,7 +133,7 @@ export default class SliderCarousel {
         this.options.position = this.options.maxPosition;
       }
 
-      this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
+      this.wrap.style.transform = `translate${this.slideBy}(-${this.options.position * this.options.widthSlide}%)`;
     }
 
     this.main.dispatchEvent(this.event);
@@ -109,7 +147,7 @@ export default class SliderCarousel {
         this.options.position = 0;
       }
 
-      this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
+      this.wrap.style.transform = `translate${this.slideBy}(-${this.options.position * this.options.widthSlide}%)`;
     }
 
     this.main.dispatchEvent(this.event);
@@ -183,7 +221,7 @@ export default class SliderCarousel {
   }
 }
 
-export let sliderCounter = {
+export const sliderCounter = {
   num: 0,
   get count() {
     this.num++;

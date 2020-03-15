@@ -1,4 +1,7 @@
-import SliderCarousel, {sliderCounter} from "../carousel";
+import {
+  SliderCarousel,
+  sliderCounter
+} from "../carousel";
 
 const partners = () => {
   const carousel = new SliderCarousel({
@@ -9,6 +12,7 @@ const partners = () => {
     next: '#partners-arrow_right',
 
     numberSlider: sliderCounter.count,
+    infinity: true,
     slidesToShow: 3,
 
     responsive: [{

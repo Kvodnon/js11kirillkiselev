@@ -1,4 +1,4 @@
-import SliderCarousel, {sliderCounter} from "../carousel";
+import { SliderCarousel, sliderCounter } from "../carousel";
 
 const reviews = () => {
   const reviews = new SliderCarousel({
