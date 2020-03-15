@@ -22,6 +22,7 @@ const initSliders = () => {
     wrap: `.${child.className}`,
   
     tabs: '.nav-list-repair',
+    tabClass: 'repair-types-nav__item',
     slideBy: 'y',
   
     numberSlider: sliderCounter.count,

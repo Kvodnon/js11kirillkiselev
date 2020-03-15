@@ -5,6 +5,7 @@ export class SliderCarousel {
     next,
     prev,
     tabs,
+    tabClass = 'glo-tab',
     slideBy = 'X',
     infinity = false,
     position = 0,
@@ -32,7 +33,9 @@ export class SliderCarousel {
     this.numberSlider = numberSlider;
 
     this.event = new Event("sliderChange");
-    this.tabs = tabs;
+    this.tabEvent = new Event("tabChange");
+    this.tabs = document.querySelector(tabs);
+    this.tabClass = tabClass;
     this.slideBy = slideBy.toUpperCase();
   }
 
@@ -98,31 +101,28 @@ export class SliderCarousel {
   }
 
   tabSlider() {
-    const tabs = [...document.querySelector(this.tabs).children];
+    const children = [...this.tabs.children];
 
-    for (const tab of tabs) {
-      tab.addEventListener('click', (event) => {
-        const current = document.querySelector('.repair-types-nav__item.active');
-        current.classList.remove('active');
+    this.tabs.addEventListener('click', (event) => {
+      const target = event.target;
 
-        const target = event.target;
+      if (!target.matches(`.${this.tabClass}`)) return;
+      console.log('target: ', target);
 
-        target.classList.add('active');
+      const current = document.querySelector(`.${this.tabClass}.active`);
+      current.classList.remove('active');
 
-        if ([...tabs].indexOf(tab) > this.options.position) {
-          this.nextSlider();
-        } else if ([...tabs].indexOf(tab) < this.options.position) {
-          this.prevSlider();
-        }
-      });
-    }
+      target.classList.add('active');
+
+      this.toSlide(children.indexOf(target));
+    });
   }
 
   toSlide(position) {
     this.options.position = position;
     this.wrap.style.transform = `translate${this.slideBy}(-${this.options.position * this.options.widthSlide}%)`;
   
-    this.main.dispatchEvent(this.event);
+    this.main.dispatchEvent(this.tabEvent);
   }
 
   prevSlider() {

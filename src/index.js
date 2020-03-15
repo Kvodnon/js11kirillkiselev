@@ -14,6 +14,7 @@ import thanks from './modules/modals/thanks';
 import transparency from './modules/modals/transparency';
 import reviews from './modules/sliders/reviews';
 import partners from './modules/sliders/partners';
+import scheme from './modules/sliders/scheme';
 
 phones();
 modalHandler();
@@ -29,3 +30,4 @@ partners();
 types();
 consultation();
 transparency();
+scheme();
