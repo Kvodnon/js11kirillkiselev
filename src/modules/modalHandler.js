@@ -3,10 +3,12 @@ const popups = document.querySelectorAll('.popup');
 const close = (target) => {
   const popup = target.closest('.popup');
   popup.classList.remove('modal_open');
+  document.body.style.overflowY = 'auto';
 };
 
 export const open = (modal) => {
   modal.classList.add('modal_open');
+  document.body.style.overflowY = 'hidden';
 };
 
 const handler = (event) => {

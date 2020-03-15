@@ -103,3 +103,9 @@
 .msg-active ~ .msg {
   max-height: 575px;
 }
+.popup-repair-types-content-table {
+  overflow-x: hidden;
+}
+.nav-list {
+  transition: none;
+}

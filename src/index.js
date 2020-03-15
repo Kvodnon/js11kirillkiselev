@@ -16,6 +16,7 @@ import reviews from './modules/sliders/reviews';
 import partners from './modules/sliders/partners';
 import scheme from './modules/sliders/scheme';
 import FAQAccordion from './modules/accordion';
+import prices from './modules/prices';
 
 phones();
 modalHandler();
@@ -33,3 +34,4 @@ consultation();
 transparency();
 scheme();
 FAQAccordion();
+prices();
