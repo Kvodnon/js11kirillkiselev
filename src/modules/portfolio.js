@@ -3,7 +3,8 @@ import { sliderCounter, SliderCarousel } from "./carousel";
 
 const modal = document.querySelector('.popup-portfolio'),
   portfolioBlock = document.querySelector('.portfolio-slider'),
-  current = document.querySelector('#portfolio-counter .slider-counter-content__current');
+  current = document.querySelector('#portfolio-counter .slider-counter-content__current'),
+  total = document.querySelector('#portfolio-counter .slider-counter-content__total');
 
 const portfolioHandler = (event) => {
   const target = event.target;
@@ -38,13 +39,43 @@ const portfolio = () => {
     
     numberSlider: sliderCounter.count,
     slidesToShow: 3,
+
+    responsive: [
+      {
+        breakpoint: 1030,
+        slideToShow: 3
+      },
+      {
+        breakpoint: 1024,
+        slideToShow: 2
+      },
+      {
+        breakpoint: 901,
+        slideToShow: 1
+      }
+    ]
   });
 
   portfolioSlider.init();
 
-  portfolioSlider.main.addEventListener('sliderChange', () => {
-    current.innerText = portfolioSlider.options.position + portfolioSlider.slidesToShow;
+  const portfolioSliderMobile = new SliderCarousel({
+    wrap: '.portfolio-slider-mobile',
+    main: '.portfolio-slider-wrap',
+    
+    prev: '#portfolio-arrow-mobile_left',
+    next: '#portfolio-arrow-mobile_right',
+
+    numberSlider: sliderCounter.count,
+    slidesToShow: 1,
   });
+
+  portfolioSliderMobile.init();
+
+  portfolioSliderMobile.main.addEventListener('sliderChange', () => {
+    current.innerText = portfolioSliderMobile.options.position + portfolioSliderMobile.slidesToShow;
+  });
+
+  total.innerText = portfolioSliderMobile.slides.length;
 
   portfolioBlock.addEventListener('click', portfolioHandler);
 };
