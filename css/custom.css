@@ -109,3 +109,39 @@
 .nav-list {
   transition: none;
 }
+#portfolio-counter {
+  z-index: 2;
+}
+
+@media screen and (max-width: 1091px) {
+  .formula-slider {
+    padding: 150px 0 300px;
+    min-height: unset;
+  }
+  .formula-slider-wrap .slider-arrow {
+    margin-top: -62px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .formula-slider {
+    padding: 85px 0 280px;
+    min-height: unset;
+  }
+}
+
+.repair-types-slider-wrap.glo-wrap {
+  overflow: visible;
+}
+.glo-wrap .glo-wrap.repair-types-slider {
+  display: block;
+}
+@media (max-width: 1024px) {
+  .nav-list-repair {
+    min-width: unset;
+  }
+  .repair-types-nav__item svg {
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  } 
+}

@@ -5,6 +5,7 @@ export class SliderCarousel {
     next,
     prev,
     tabs,
+    hideArrow = false,
     tabClass = 'glo-tab',
     slideBy = 'X',
     infinity = false,
@@ -38,6 +39,10 @@ export class SliderCarousel {
     this.tabs = document.querySelector(tabs);
     this.tabClass = tabClass;
     this.slideBy = slideBy.toUpperCase();
+    this.hideArrow = hideArrow;
+    this.callbacks = {};
+    this.callbacks.prev = {};
+    this.callbacks.next = {};
   }
 
   init() {
@@ -86,10 +91,10 @@ export class SliderCarousel {
         max-width: none;
         flex: 0 0 ${this.options.widthSlide}%;
         align-items: center;
-        justify-content: center;
         margin: auto 0;
-        transition: margin-left .5s;
-        will-change: margin-left;
+        transition: margin .5s; 
+        will-change: margin;
+        margin-top: 0;
       }
     `;
 
@@ -102,8 +107,15 @@ export class SliderCarousel {
   }
 
   controlSlider() {
-    this.prev.addEventListener('click', this.prevSlider.bind(this));
-    this.next.addEventListener('click', this.nextSlider.bind(this));
+    this.callbacks.prev = this.prevSlider.bind(this);
+    this.callbacks.next = this.nextSlider.bind(this);
+    this.prev.addEventListener('click', this.callbacks.prev);
+    this.next.addEventListener('click', this.callbacks.next);
+  }
+
+  removeControl() {
+    this.prev.removeEventListener('click', this.callbacks.prev);
+    this.next.removeEventListener('click', this.callbacks.next);
   }
 
   tabSlider() {
@@ -128,10 +140,15 @@ export class SliderCarousel {
 
   toSlide(position) {
     this.options.position = position;
-    // this.wrap.style.transform = `translate${this.slideBy}(-${this.options.position * this.options.widthSlide}%)`;
-    this.first.style.marginLeft = `-${this.options.position * this.options.widthSlide}%`;
-  
+
+    if (this.slideBy === 'Y') {
+      this.first.style.marginTop = `calc(${this.options.position} * -100%)`;
+    } else {
+      this.first.style.marginLeft = `-${this.options.position * this.options.widthSlide}%`;
+    }
+
     this.main.dispatchEvent(this.tabEvent);
+    this.wrap.dispatchEvent(this.tabEvent);
   }
 
   prevSlider() {
@@ -141,12 +158,25 @@ export class SliderCarousel {
       if (this.options.position < 0) {
         this.options.position = this.options.maxPosition;
       }
+      
+      if (this.slideBy === 'Y') {
+        this.first.style.marginTop = `-${this.options.position * this.options.widthSlide}%`;
+      } else {
+        this.first.style.marginLeft = `-${this.options.position * this.options.widthSlide}%`;
+      }
+    }
 
-      // this.wrap.style.transform = `translate${this.slideBy}(-${this.options.position * this.options.widthSlide}%)`;
-      this.first.style.marginLeft = `-${this.options.position * this.options.widthSlide}%`;
+    if (!this.options.infinity && this.hideArrow) {
+      if (this.options.position === 0 && this.options.position !== this.options.maxPosition) {
+        this.prev.style.display = 'none';
+      } else {
+        this.prev.style.display = 'flex';
+        this.next.style.display = 'flex';
+      }
     }
 
     this.main.dispatchEvent(this.event);
+    this.wrap.dispatchEvent(this.event);
   }
   
   nextSlider() {
@@ -156,12 +186,25 @@ export class SliderCarousel {
       if (this.options.position > this.options.maxPosition) {
         this.options.position = 0;
       }
+      
+      if (this.slideBy === 'Y') {
+        this.first.style.marginTop = `-${this.options.position * this.options.widthSlide}%`;
+      } else {
+        this.first.style.marginLeft = `-${this.options.position * this.options.widthSlide}%`;
+      }
+    }
 
-      // this.wrap.style.transform = `translate${this.slideBy}(-${this.options.position * this.options.widthSlide}%)`;
-      this.first.style.marginLeft = `-${this.options.position * this.options.widthSlide}%`;
+    if (!this.options.infinity && this.hideArrow) {
+      if (this.options.position === this.options.maxPosition && this.options.position !== 0) {
+        this.next.style.display = 'none';
+      } else {
+        this.next.style.display = 'flex';
+        this.prev.style.display = 'flex';
+      }
     }
 
     this.main.dispatchEvent(this.event);
+    this.wrap.dispatchEvent(this.event);
   }
 
   addArrow() {

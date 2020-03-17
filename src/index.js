@@ -17,6 +17,8 @@ import partners from './modules/sliders/partners';
 import scheme from './modules/sliders/scheme';
 import FAQAccordion from './modules/accordion';
 import prices from './modules/prices';
+import portfolio from './modules/portfolio';
+import design from './modules/design';
 
 phones();
 modalHandler();
@@ -35,3 +37,5 @@ transparency();
 scheme();
 FAQAccordion();
 prices();
+portfolio();
+design();
