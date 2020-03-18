@@ -3,7 +3,9 @@ import { sliderCounter, SliderCarousel } from "./carousel";
 const sliders = document.querySelector('.designs-slider'),
   current = document.querySelector('#designs-counter .slider-counter-content__current'),
   tab = document.getElementById('designs-list'),
-  total = document.querySelector('#designs-counter .slider-counter-content__total');
+  total = document.querySelector('#designs-counter .slider-counter-content__total'),
+  paginations = document.querySelectorAll('.preview-block'),
+  designs = document.getElementById('designs');
 
 let designSlider,
   designSliders = [],
@@ -14,14 +16,26 @@ const tabHandler = (event) => {
 
   if (!target.matches('.designs-nav__item')) return;
 
+  const children = [...designSlider.tabs.children],
+    slider = designSliders[children.indexOf(target)],
+    tabChildren = [...tab.children],
+    paginationActive = document.querySelector('.preview-block.visible'),
+    paginationNeeded = tabChildren.indexOf(target);
+
+
   for (const slider of designSliders) {
     slider.removeControl();
   }
 
-  const children = [...designSlider.tabs.children];
-
-  const slider = designSliders[children.indexOf(target)];
   slider.controlSlider();
+  paginationActive.classList.remove('visible');
+  paginations[paginationNeeded].classList.add('visible');
+
+  const dotActive = paginations[paginationNeeded].querySelector('.preview_active');
+  dotActive.classList.remove('preview_active');
+
+  const dot = paginations[paginationNeeded].children[slider.options.position];
+  dot.querySelector('.preview-block__item-inner').classList.add('preview_active');
 
   current.innerText = slider.options.position + 1;
   total.innerText = slider.slides.length;
@@ -67,6 +81,7 @@ const design = () => {
   });
 
   designSlider.init();
+
   
   tab.addEventListener('click', tabHandler);
 
@@ -93,22 +108,46 @@ const design = () => {
   });
   
   tabsSlider.init();
-
+  
   const responseHandler = () => {
     if (document.documentElement.clientWidth < 1025) {
       if (!tabsSlider.style) {
         tabsSlider.addStyle();
       }
-    } else if (document.documentElement.clientWidth > 1024) {
-      if (tabsSlider.style) {
-        tabsSlider.removeStyle();
-      }
+    } else if (document.documentElement.clientWidth > 1024 && tabsSlider.style) {
+      tabsSlider.removeStyle();
+      tab.children[0].style.marginLeft = 0;
     }
   };
 
   responseHandler();
+
+  tabsSlider.wrap.addEventListener('responseEventAfter', responseHandler);
+
+  const paginationHandler = () => {
+    let {target} = event;
+    
+    target = target.closest('.preview-block__item');
+
+    if (!target) return;
+    
+    const pagination = target.parentNode,
+      paginationIndex = [...paginations].indexOf(pagination),
+      slider = designSliders[paginationIndex],
+      paginationChldren = [...pagination.children],
+      dotIndex = paginationChldren.indexOf(target);
+    
+    slider.toSlide(dotIndex);
+
+    const dotActive = pagination.querySelector('.preview_active');
+
+    dotActive.classList.remove('preview_active');
+
+    const dot = target.querySelector('.preview-block__item-inner');
+    dot.classList.add('preview_active');
+  };
   
-  window.addEventListener('resize', responseHandler);
+  designs.addEventListener('click', paginationHandler);
 };
 
 

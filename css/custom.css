@@ -206,3 +206,7 @@
 .glo-wrap.designs-slider-wrap .designs-slider {
   display: block;
 }
+.designs-slider__style-slide img {
+  width: 100%;
+  object-fit: fill;
+}

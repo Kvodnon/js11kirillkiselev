@@ -36,6 +36,7 @@ export class SliderCarousel {
 
     this.event = new Event("sliderChange");
     this.tabEvent = new Event("tabChange");
+    this.responseEventAfter = new Event("responseEventAfter");
     this.tabs = document.querySelector(tabs);
     this.tabClass = tabClass;
     this.slideBy = slideBy.toUpperCase();
@@ -260,6 +261,8 @@ export class SliderCarousel {
         this.options.widthSlide = Math.floor(100 / this.slidesToShow);
         this.addStyle();
       }
+      
+      this.wrap.dispatchEvent(this.responseEventAfter);
     }
 
     checkResponse();
