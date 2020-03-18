@@ -96,9 +96,6 @@ const prices = () => {
       }
 
       return response.json();
-    }, (error) => {
-      messageStatus.src = messages.error;
-      console.error(error);
     })
     .then(priceHandler);
     

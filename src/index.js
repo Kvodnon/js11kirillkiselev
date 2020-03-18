@@ -1,5 +1,15 @@
 'use strict';
 
+import "@babel/polyfill";
+import 'nodelist-foreach-polyfill';
+import elementClosest from 'element-closest';
+elementClosest(window);
+import 'new-event-polyfill';
+import 'remove-polyfill';
+import 'formdata-polyfill';
+import 'es6-promise';
+import 'fetch-polyfill';
+
 import phones from './modules/phones';
 import sideMenu from './modules/menu';
 import inputMasks from './modules/inputMasks';
@@ -42,4 +52,4 @@ prices();
 portfolio();
 design();
 problemsSlider();
-problemsTooltip()
+problemsTooltip();

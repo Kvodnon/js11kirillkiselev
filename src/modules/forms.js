@@ -18,13 +18,13 @@ const formHandler = (event) => {
   const form = event.target,
     policy = form.querySelector('.checkbox__input');
 
-  if (!policy.checked) {
-    alert('Отметьте галочку!');
-  } else {
+    if (!policy.checked) {
+      alert('Отметьте галочку!');
+    } else {
     const formData = new FormData(form);
-  
+    
     let body = {};
-  
+    
     formData.forEach((value, key) => {
       body[key] = value;
     });
@@ -35,7 +35,6 @@ const formHandler = (event) => {
       }
   
       openThanksPopup();
-  
     }, (error) => {
   
       console.log(error);

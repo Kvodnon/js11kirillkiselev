@@ -132,7 +132,8 @@
     padding: 150px 0 300px;
     min-height: unset;
   }
-  .formula-slider-wrap .slider-arrow {
+  .formula-slider-wrap .slider-arrow,
+  .problems-slider-wrap .slider-arrow {
     margin-top: -62px;
   }
 }
@@ -142,7 +143,7 @@
     min-height: unset;
   }
   .problems-item {
-    max-width: unset;
+    max-width: none;
   }
 }
 
@@ -183,7 +184,7 @@
     left: 15px;
   }
   .portfolio-slider-wrap {
-    max-width: unset;
+    max-width: none;
   }
   
 }
@@ -226,4 +227,10 @@
 .designs-slider__style-slide img {
   width: 100%;
   object-fit: fill;
+}
+#problems-arrow_right {
+  right: 20px;
+}
+#problems-arrow_left {
+  left: 20px;
 }
