@@ -19,6 +19,8 @@ import FAQAccordion from './modules/accordion';
 import prices from './modules/prices';
 import portfolio from './modules/portfolio';
 import design from './modules/design';
+import problemsSlider from './modules/problemsSlider';
+import problemsTooltip from './modules/problemsTooltip';
 
 phones();
 modalHandler();
@@ -39,3 +41,5 @@ FAQAccordion();
 prices();
 portfolio();
 design();
+problemsSlider();
+problemsTooltip()
