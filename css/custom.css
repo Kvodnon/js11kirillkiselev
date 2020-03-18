@@ -1,3 +1,6 @@
+.glo-wrap {
+  overflow: hidden;
+}
 .formula-item-popup {
   transition: opacity .5s;
   will-change: opacity;
@@ -133,10 +136,12 @@
   display: block;
 }
 @media (max-width: 1024px) {
-  .nav-list-repair {
+  .nav-list-repair,
+  #designs-list {
     min-width: unset;
   }
-  .repair-types-nav__item svg {
+  .repair-types-nav__item svg,
+  .designs-nav__item svg {
     left: 0;
     right: 0;
     margin: 0 auto;
@@ -196,5 +201,8 @@
   }
 }
 .popup-portfolio-text.active {
+  display: block;
+}
+.glo-wrap.designs-slider-wrap .designs-slider {
   display: block;
 }

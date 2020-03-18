@@ -80,21 +80,20 @@ export class SliderCarousel {
     }
 
     this.style.textContent = `
-      .glo-wrap {
-        overflow: hidden;
-      }
       .glo-wrap .glo-slider${this.numberSlider} {
         display: flex;
         ${this.slideBy === 'Y' ? 'flex-wrap: wrap;' : 'flex-wrap: nowrap;'}
       }
-      .glo-slider${this.numberSlider} .glo-slider__item {
+      .glo-slider${this.numberSlider} > .glo-slider__item {
         max-width: none;
         flex: 0 0 ${this.options.widthSlide}%;
         align-items: center;
         margin: auto 0;
-        transition: margin .5s; 
-        will-change: margin;
-        margin-top: 0;
+        transition: margin-left .5s, top .5s; 
+        will-change: margin-left, top;
+        position: relative;
+        top: 0;
+        height: 100%;
       }
     `;
 
@@ -142,7 +141,9 @@ export class SliderCarousel {
     this.options.position = position;
 
     if (this.slideBy === 'Y') {
-      this.first.style.marginTop = `calc(${this.options.position} * -100%)`;
+      for (const slide of this.slides) {
+        slide.style.top = `-${this.options.position * this.options.widthSlide}%`;
+      }
     } else {
       this.first.style.marginLeft = `-${this.options.position * this.options.widthSlide}%`;
     }
@@ -158,12 +159,8 @@ export class SliderCarousel {
       if (this.options.position < 0) {
         this.options.position = this.options.maxPosition;
       }
-      
-      if (this.slideBy === 'Y') {
-        this.first.style.marginTop = `-${this.options.position * this.options.widthSlide}%`;
-      } else {
-        this.first.style.marginLeft = `-${this.options.position * this.options.widthSlide}%`;
-      }
+
+      this.toSlide(this.options.position);
     }
 
     if (!this.options.infinity && this.hideArrow) {
@@ -187,11 +184,7 @@ export class SliderCarousel {
         this.options.position = 0;
       }
       
-      if (this.slideBy === 'Y') {
-        this.first.style.marginTop = `-${this.options.position * this.options.widthSlide}%`;
-      } else {
-        this.first.style.marginLeft = `-${this.options.position * this.options.widthSlide}%`;
-      }
+      this.toSlide(this.options.position);
     }
 
     if (!this.options.infinity && this.hideArrow) {
