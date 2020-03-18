@@ -234,3 +234,11 @@
 #problems-arrow_left {
   left: 20px;
 }
+@media (max-width: 575px) {
+  #formula-arrow_left {
+    left: -40px;
+  }
+  #formula-arrow_right {
+    right: -40px;
+  }
+}

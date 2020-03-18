@@ -88,6 +88,7 @@ const initSliders = () => {
       if (tabsSlider.style) {
         tabsSlider.removeStyle();
       }
+      typesSlider.tabs.children[0].style.marginLeft = 0;
     }
   };
 
