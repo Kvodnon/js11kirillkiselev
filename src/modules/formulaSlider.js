@@ -11,7 +11,7 @@ const getSlidesToShow = () => {
 }
 
 let slidesToShow = getSlidesToShow(),
-  responseCurrentSlider = getSlidesToShow() === 1 ? 1 : 2;
+  responseCurrentSlider = getSlidesToShow() === 1 ? 1 : slidesDefault;
 
 const slideToRight = () => {
   const prev = slider.appendChild(slides[0]);
@@ -54,6 +54,12 @@ const slideToLeft = () => {
 
 const responseInit = () => {
   insertSlideToStart();
+  
+  if (responseCurrentSlider === 1) {
+    slider.classList.add('formula-slider_mobile');
+  } else {
+    slider.classList.add('formula-slider_desktop');
+  }
 
   if (slidesToShow === slidesDefault) {
     insertSlideToStart();
@@ -77,7 +83,23 @@ const responseInit = () => {
 };
 
 const resizeHandler = () => {
-  slidesToShow = getSlidesToShow();
+  responseCurrentSlider = slidesToShow = getSlidesToShow();
+
+  if (responseCurrentSlider === 1 && !slider.classList.contains('formula-slider_mobile')) {
+    slider.classList.remove('formula-slider_desktop');
+    slider.classList.add('formula-slider_mobile');
+    slideToRight();
+  } else if (responseCurrentSlider === slidesDefault && !slider.classList.contains('formula-slider_desktop')) {
+    slideToLeft();
+    slider.classList.add('formula-slider_desktop');
+    slider.classList.remove('formula-slider_mobile');
+  }
+  
+  if (responseCurrentSlider === 1) {
+    slider.classList.remove('formula-slider_desktop');
+  } else {
+    slider.classList.remove('formula-slider_mobile');
+  }
 
   for (const slide of slides) {
     if (slidesToShow === slidesDefault) {
