@@ -242,3 +242,10 @@
     right: -40px;
   }
 }
+.popup-design-slider {
+  height: 100%;
+}
+.popup-design-slider > div,
+.popup-design-slider > div > div {
+  width: 100%;
+}

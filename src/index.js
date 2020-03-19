@@ -31,6 +31,7 @@ import portfolio from './modules/portfolio';
 import design from './modules/design';
 import problemsSlider from './modules/problemsSlider';
 import problemsTooltip from './modules/problemsTooltip';
+import designModal from "./modules/modals/design";
 
 phones();
 modalHandler();
@@ -53,3 +54,4 @@ portfolio();
 design();
 problemsSlider();
 problemsTooltip();
+designModal();

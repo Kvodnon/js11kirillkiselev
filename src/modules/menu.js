@@ -66,7 +66,7 @@ const closeMenu = () => {
 }
 
 const animateLink = (target) => {
-  const anchor = document.getElementById(target.children[0].href.split('#')[1]);
+  const anchor = document.getElementById(target.href.split('#')[1]);
 
   requestAnimationFrame((timestamp) => {
     const stamp = timestamp || new Date().getTime();
@@ -99,7 +99,7 @@ const menuHandler = (event) => {
 const toTopHandler = (event) => {
   event.preventDefault();
   const target = event.target.closest('.button-footer');
-  animateLink(target);
+  animateLink(target.children[0]);
 }
 
 const sideMenu = () => {
