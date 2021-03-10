@@ -33,7 +33,7 @@
     "detect-file": "^1.0.0",
     "domain-browser": "^1.2.0",
     "element-closest": "^3.0.2",
-    "elliptic": "^6.5.2",
+    "elliptic": "^6.5.4",
     "emoji-regex": "^7.0.3",
     "emojis-list": "^3.0.0",
     "errno": "^0.1.7",
